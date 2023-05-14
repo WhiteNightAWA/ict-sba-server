@@ -9,9 +9,11 @@ require("dotenv").config();
 const nodemailer = require("nodemailer");
 const {sendCode} = require("./auth/sendCode");
 const port = 80;
+const cors = require('cors');
 
 const server = express();
 server.use(express.json());
+server.use(cors());
 
 // Data Base
 mongoose.connect(process.env.DB_URL, {

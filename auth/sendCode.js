@@ -36,7 +36,11 @@ const sendCode = async (req, res) => {
                       `<h1>${data.code}</h1>` +
                       "If you had not register on our site, please ignore/delete this mail."
             });
-            res.sendStatus(200);
+            res.status(200).json({
+                code: 200,
+                msg: "Mail sent!",
+                severify: "success"
+            });
         }
     } catch (err) {
         console.log(err);
@@ -44,6 +48,8 @@ const sendCode = async (req, res) => {
             error: "server_error",
             error_description: err,
             code: 500,
+            msg: err.toString(),
+            severify: "error"
         });
     }
 }

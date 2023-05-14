@@ -1,9 +1,11 @@
 const User = require("../models/user");
 const EmailVerify = require("../models/emailVerify");
 
-module.exports = register = async (req, res) => {
+const register = async (req, res) => {
     try {
         const { username, email, code, password } = req.body;
+
+        console.log(username, email, code, password )
 
         if (await User.findOne({email})) {
             return res.stats(400).json({
@@ -23,4 +25,8 @@ module.exports = register = async (req, res) => {
             code: 500,
         });
     }
+}
+
+module.exports = {
+    register
 }

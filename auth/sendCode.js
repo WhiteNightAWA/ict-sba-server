@@ -1,0 +1,53 @@
+const User = require("../models/user");
+const EmailVerify = require("../models/emailVerify");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
+
+
+const sendCode = async (req, res) => {
+    console.log("test");
+    try {
+        const { email } = req.body;
+
+        if (await User.findOne({email})) {
+            res.status(400).json({
+                error: "register_email_existed",
+                error_description: "This email has been registered.",
+                code: 400,
+            });
+        } else {
+            let data = await EmailVerify.create({email});
+            let transporter = nodemailer.createTransport({
+                service: "gmail",
+                auth: {
+                    user: process.env.MAIL,
+                    pass: process.env.PASS
+                },
+                tls: {
+                    rejectUnauthorized: false
+                }
+            });
+            let info = await transporter.sendMail({
+                from: '"買D餸" <buy.d.song@gmail.com>',
+                to: email,
+                subject: "買D餸 Email Verification",
+                html: '<h1>Looks like you are registering on our website <a target="_blank" href="https://whitenightawa.github.io/ict-sba/">買D餸</a>.</h1>' +
+                      "here are your verify code:" +
+                      `<h1>${data.code}</h1>` +
+                      "If you had not register on our site, please ignore/delete this mail."
+            });
+            res.sendStatus(200);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            error: "server_error",
+            error_description: err,
+            code: 500,
+        });
+    }
+}
+
+module.exports = {
+    sendCode
+};

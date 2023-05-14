@@ -6,9 +6,9 @@
 
 Deploy this Node Express Server easily with [Northflank](https://www.northflank.com):
 
-- [Create a service from template on Northflank](https://app.northflank.com/s/project/create/template-service)
+- [Create a service from template on Northflank](https://server.northflank.com/s/project/create/template-service)
 - Select the Node.js Express template
-- Wait for the app to build and visit the newly assigned URL. That's it!
+- Wait for the server to build and visit the newly assigned URL. That's it!
 
 You can now clone your repository locally and start making changes. Push your changes to automatically build and deploy the updated application!
 

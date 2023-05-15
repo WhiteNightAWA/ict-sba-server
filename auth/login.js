@@ -56,7 +56,7 @@ const login = async (req, res) => {
         res.status(200).cookie("jwtRT", RT, {
             maxAge: 30 * 24 * 60 * 60 * 1000,
             httpOnly: true,
-            secure: trur, // TODO turn on after dev
+            secure: true, // TODO turn on after dev
             sameSite: "None",
         }).json({
             msg: "login_successfully",

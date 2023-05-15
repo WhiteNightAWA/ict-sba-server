@@ -32,10 +32,10 @@ db.once("open", () => console.log("Connected to Database."));
 
 
 server.get("/", (req, res) => {
-	res.send("hi");
+	res.send("Welcome to the backend of https://whitenightawa.github.io/ict-sba/");
 });
 
-server.post("/auth/signup", register);
+server.post("/auth/register", register);
 
 server.post("/auth/login", async (req, res) => {
 

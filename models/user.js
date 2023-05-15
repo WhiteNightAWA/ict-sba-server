@@ -1,10 +1,17 @@
 const mongoose = require("mongoose");
+const { v4 } = require("uuid");
 
 
 const userSchema = new mongoose.Schema({
     _id: {
         type: String,
         required: true,
+    },
+    id: {
+        type: String,
+        required: true,
+        unique: true,
+        default: v4()
     },
     google: {
         type: Boolean,

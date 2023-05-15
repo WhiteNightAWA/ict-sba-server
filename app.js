@@ -2,17 +2,21 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const {sign} = require("jsonwebtoken");
 const {register} = require("./auth/register");
+const {login} = require("./auth/login");
 const User = require("./models/user");
 const mongoose = require("mongoose");
 const EmailVerify = require("./models/emailVerify");
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 const {sendCode} = require("./auth/sendCode");
-const port = 80;
+var cookieParser = require('cookie-parser')
+const port = 3100;
 const cors = require('cors');
-
 const server = express();
+
+
 server.use(express.json());
+server.use(cookieParser());
 server.use(cors());
 
 // Data Base
@@ -34,37 +38,7 @@ db.once("open", () => console.log("Connected to Database."));
 server.get("/", (req, res) => {
 	res.send("Welcome to the backend of https://whitenightawa.github.io/ict-sba/");
 });
-
-server.post("/auth/register", register);
-
-server.post("/auth/login", async (req, res) => {
-
-
-	const { email } = req.body;
-	console.log(email);
-	// await bcrypt.compare()
-
-});
-
-
-server.post("/auth/code", sendCode);
-
-
-function authToken(req, res, next) {
-	const authHeader = req.headers.auth;
-	const token = authHeader && authHeader.split(" ")[1];
-
-	if (token === null) {
-		return res.sendStatus(401)
-	} else {
-		jwt.verify(token, process.env.AT, (e, u) => {
-			if (e) return res.sendStatus(403);
-			console.log(u);
-			req.u = u;
-			next();
-		})
-	}
-}
+server.use("/auth", require("./routes/authRouter"));
 
 
 server.listen(port, () => {

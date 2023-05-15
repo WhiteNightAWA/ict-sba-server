@@ -8,7 +8,6 @@ const emailVerifySchema = new mongoose.Schema({
     code: {
         type: Number,
         required: true,
-        default:  Math.round(Math.random()*10**8)
     },
     createAt: {
         type: Date,

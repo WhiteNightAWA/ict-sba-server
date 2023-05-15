@@ -1,27 +1,11 @@
 const User = require("../models/user");
 const EmailVerify = require("../models/emailVerify");
-const jwt = require("jsonwebtoken");
-
-
-function genAT(userID) {
-    return jwt.sign({
-        userID
-    }, process.env.AT_TOKEN, {
-        expiresIn: "1h",
-    })
-}
-function genRT(userID, RTID) {
-    return jwt.sign({
-        userID, RTID
-    }, process.env.RT_TOKEN, {
-        expiresIn: "30d",
-    })
-}
+const { hash } = require("bcrypt");
 
 
 const register = async (req, res) => {
     try {
-        const { username, email, code, password } = req.body;
+        const {username, email, code, password} = req.body;
 
         console.log(username, email, code, password);
 
@@ -33,9 +17,10 @@ const register = async (req, res) => {
             });
         }
 
-        DBcode = await EmailVerify.findOne({email});
+        let DBcode = await EmailVerify.find({email});
+        let codes = DBcode.map(x => x.code);
 
-        if (await User.findOne({email, google: false })) {
+        if (await User.findOne({email, google: false})) {
             return res.status(400).json({
                 error: "register_email_existed",
                 error_description: "The email has been registered.",
@@ -47,15 +32,25 @@ const register = async (req, res) => {
                 error_description: "Verify email not sent or expired.",
                 code: 400,
             });
-        } else if (DBcode.code === code) {
+        } else if (codes.includes(code)) {
             // register user
 
-            let user = User({
+            let user = await User.create({
+                google: false,
+                username,
+                email,
+                password: await hash(password, 12),
+            });
+            console.log(user);
+            const { user_id } = user;
 
+            await EmailVerify.deleteMany({ email });
+
+            return res.status(200).json({
+                code: 200,
+                user_id,
+                msg: "register_successfully",
             })
-
-
-
         } else {
             return res.status(400).json({
                 error: "verify_code_incorrect",
@@ -67,7 +62,8 @@ const register = async (req, res) => {
         console.log(err);
         return res.status(500).json({
             error: "server_error",
-            error_description: err,
+            error_description: err.toString(),
+            error_json: err,
             code: 500,
         });
     }

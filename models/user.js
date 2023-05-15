@@ -3,15 +3,11 @@ const { v4 } = require("uuid");
 
 
 const userSchema = new mongoose.Schema({
-    _id: {
-        type: String,
-        required: true,
-    },
-    id: {
+    user_id: {
         type: String,
         required: true,
         unique: true,
-        default: v4()
+        default: v4(undefined, undefined, undefined),
     },
     google: {
         type: Boolean,
@@ -34,22 +30,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
-    tokens: {
-        type: [
-            {
-                token: {
-                    type: String,
-                    required: true,
-                },
-                expiredDate: {
-                    type: Date,
-                    required: true,
-                    default: Date.now(),
-                },
-            },
-        ],
-    },
     createTime: {
+        type: Date,
+        default: Date.now(),
+    },
+    lastLogin: {
         type: Date,
         default: Date.now(),
     }

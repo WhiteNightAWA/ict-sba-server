@@ -10,7 +10,7 @@ require("dotenv").config();
 const nodemailer = require("nodemailer");
 const {sendCode} = require("./auth/sendCode");
 var cookieParser = require('cookie-parser')
-const port = 3100;
+const port = 80;
 const cors = require('cors');
 const server = express();
 

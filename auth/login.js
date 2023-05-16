@@ -59,7 +59,8 @@ const login = async (req, res) => {
             secure: true, // TODO turn on after dev
             sameSite: "None",
         }).json({
-            msg: "login_successfully",
+            success: "login_successfully",
+            msg: "Login successfully!",
             code: 200,
             at: AT,
         });

@@ -42,6 +42,7 @@ const sendCode = async (req, res) => {
             // });
             res.status(200).json({
                 code: 200,
+                success: "mail_sent_successfully",
                 msg: "Mail sent!",
                 severify: "success"
             });

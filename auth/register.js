@@ -49,7 +49,8 @@ const register = async (req, res) => {
             return res.status(200).json({
                 code: 200,
                 user_id,
-                msg: "register_successfully",
+                success: "register_successfully",
+                msg: "Sign Up Successfully!",
             })
         } else {
             return res.status(400).json({

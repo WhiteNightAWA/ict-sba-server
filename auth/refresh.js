@@ -42,7 +42,8 @@ const refresh = async (req, res) => {
                 });
 
                 res.status(200).json({
-                    msg: "refresh_successfully",
+                    success: "refresh_successfully",
+                    msg: "Token refreshed successfully!",
                     code: 200,
                     at: AT,
                 });

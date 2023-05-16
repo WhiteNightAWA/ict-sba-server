@@ -9,7 +9,8 @@ const logout = async (req, res) => {
         secure: true,
     }).stats(200).json({
         code: 200,
-        msg: "logout_successfully"
+        success: "logout_successfully",
+        msg: "Logout successfully!",
     });
 };
 

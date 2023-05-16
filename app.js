@@ -10,10 +10,10 @@ require("dotenv").config();
 const nodemailer = require("nodemailer");
 const {sendCode} = require("./auth/sendCode");
 var cookieParser = require('cookie-parser')
-const port = 80;
+
+const port = process.env.PORT || 3100;
 const cors = require('cors');
 const server = express();
-
 
 server.use(express.json());
 server.use(cookieParser());
@@ -42,7 +42,7 @@ server.use("/auth", require("./routes/authRouter"));
 
 
 server.listen(port, () => {
-	console.log("Server listening to 3100 port.");
+	console.log(`Server listening to ${process.env.PORT || 3100} port.`);
 });
 
 

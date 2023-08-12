@@ -1,13 +1,11 @@
 const mongoose = require("mongoose");
-const { v4 } = require("uuid");
 
 
 const userSchema = new mongoose.Schema({
     user_id: {
         type: String,
         required: true,
-        unique: true,
-        default: v4(undefined, undefined, undefined),
+        unique: true
     },
     google: {
         type: Boolean,
@@ -37,6 +35,29 @@ const userSchema = new mongoose.Schema({
     lastLogin: {
         type: Date,
         default: Date.now(),
+    },
+    type: {
+        type: String,
+        default: null
+    },
+    shopData: {
+        fn: String,
+        ln: String,
+        HKID: String,
+        vat: String,
+        shopName: String,
+        shopDesc: String,
+        shopPhotos: [String],
+        rating: [{
+            username: String,
+            nick: Boolean,
+            rate: Number,
+            comment: String,
+            time: Date,
+        }],
+        position: [
+
+        ]
     }
 });
 

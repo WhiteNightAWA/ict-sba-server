@@ -13,6 +13,7 @@ var cookieParser = require('cookie-parser')
 
 const port = process.env.PORT || 3100;
 const cors = require('cors');
+const {verifyJWT} = require("./middleware/verifyJWT");
 const server = express();
 
 server.use(express.json());
@@ -33,13 +34,11 @@ mongoose.connection.on('connected', function() {
 });
 db.once("open", () => console.log("Connected to Database."));
 
-
-
 server.get("/", (req, res) => {
 	res.send("Welcome to the backend of https://whitenightawa.github.io/ict-sba/");
 });
 server.use("/auth", require("./routes/authRouter"));
-
+server.use("/users", verifyJWT, require("./routes/usersRouter"));
 
 server.listen(port, () => {
 	console.log(`Server listening to ${process.env.PORT || 3100} port.`);

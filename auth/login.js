@@ -1,11 +1,86 @@
 const User = require("../models/user");
 const {compare} = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const axios = require("axios");
 
+const doLogin = async (user, res) => {
+    await User.findOneAndUpdate({user_id: user.user_id}, {
+        lastLogin: Date.now(),
+    });
+
+    const AT = jwt.sign({
+        email: user.email,
+        username: user.username,
+        user_id: user.user_id,
+    }, process.env.ATS, {
+        expiresIn: "30d"
+    });
+
+    return res.status(200).cookie("jwt", AT, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        priority: "high",
+        httpOnly: false,
+        secure: true, // TODO turn on after dev
+        sameSite: "None",
+    }).json({
+        success: "login_successfully",
+        msg: "Login successfully!",
+        code: 200,
+        cookies: ["jwt", AT, {
+            maxAge: 30 * 24 * 60 * 60 * 1000,
+            priority: "high",
+            httpOnly: false,
+            secure: true, // TODO turn on after dev
+        }]
+    });
+}
 
 const login = async (req, res) => {
     try {
-        const {email, password} = req.body;
+        const {email, password, google} = req.body;
+        if (google) {
+            const {access_token} = google;
+            if ([access_token].includes(undefined)) {
+                return res.status(400).json({
+                    error: "uncompleted_form",
+                    error_description: "Somethings is undefined in { access_token }.",
+                    code: 400,
+                });
+            }
+
+            let response;
+            try {
+                response = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+                    headers: {Authorization: `Bearer ${access_token}`}
+                });
+            } catch (err) {
+                console.log(err);
+                return res.status(400).json({
+                    error: "invalid_access_token",
+                    error_description: "Invalid access token.",
+                    code: 400,
+                });
+            }
+            const {email} = response.data;
+
+            const user = await User.findOne({email});
+            if (!user) {
+                return res.status(400).json({
+                    error: "not_register",
+                    error_description: "This Email had not register yet.",
+                    code: 400,
+                });
+            }
+            if (!user.google) {
+                return res.status(400).json({
+                    error: "not_google",
+                    error_description: "This Email had been register as normal account.",
+                    code: 400,
+                });
+            }
+
+            return await doLogin(user, res);
+        }
 
         if ([email, password].includes(undefined)) {
             return res.status(400).json({
@@ -15,57 +90,16 @@ const login = async (req, res) => {
             });
         }
 
-        const user = await User.findOne({ email });
-
-        if (!user || !(await compare(password, user.password))) {
+        const user = await User.findOne({email});
+        console.log(user);
+        if (user.google) {
             return res.status(400).json({
-                error: "password_incorrect",
-                error_description: "Invalid email or password.",
-                code: 401,
-            });
-        }
-        const jwtRT = req.cookies.jwtRT;
-
-        if (jwtRT) {
-            return res.status(400).json({
-                error: "already_logged_in",
-                error_description: "The cookies have jwt token",
+                error: "login_by_google",
+                error_description: "This email should login by google.",
                 code: 400,
             });
         }
-        await User.findByIdAndUpdate({ _id: user._id }, {
-            lastLogin: Date.now(),
-        });
-
-        const AT = jwt.sign({
-            email,
-            username: user.username,
-            user_id: user.user_id,
-        }, process.env.ATS, {
-            expiresIn: "10m"
-        });
-
-        const RT = jwt.sign({
-            username: user.username,
-            user_id: user.user_id,
-        }, process.env.RTS, {
-            expiresIn: "30d",
-        })
-
-
-        res.status(200).cookie("jwtRT", RT, {
-            maxAge: 30 * 24 * 60 * 60 * 1000,
-            httpOnly: true,
-            secure: true, // TODO turn on after dev
-            sameSite: "None",
-        }).json({
-            success: "login_successfully",
-            msg: "Login successfully!",
-            code: 200,
-            at: AT,
-        });
-
-
+        return await doLogin(user, res);
     } catch (err) {
         console.log(err);
         return res.status(500).json({

@@ -47,7 +47,10 @@ const userSchema = new mongoose.Schema({
         vat: String,
         shopName: String,
         shopDesc: String,
+        avatar: String,
         shopPhotos: [String],
+        phone: Number,
+        short: String,
         rating: [{
             username: String,
             nick: Boolean,

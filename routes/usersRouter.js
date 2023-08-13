@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const {done} = require("../users/done");
+const {update} = require("../users/update");
 
 
 router.route("/")
@@ -17,6 +18,9 @@ router.route("/test")
         try {
             const user = await User.findOne({ user_id: req.user_id });
             user.password = "-";
+            if (user.shopData?.HKID) {
+                user.shopData.HKID = "-"
+            }
             res.status(200).json(user);
         } catch (err) {
             console.log(err);
@@ -30,6 +34,8 @@ router.route("/test")
     });
 router.route("/done")
     .post(done);
+router.route("/update")
+    .post(update);
 
 
 module.exports = router;

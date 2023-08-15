@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/user");
 const {done} = require("../users/done");
 const {update} = require("../users/update");
-const {shop} = require("../users/shop");
+const {shop} = require("../shop");
 
 
 router.route("/")
@@ -37,8 +37,6 @@ router.route("/done")
     .post(done);
 router.route("/update")
     .post(update);
-router.route("/shops")
-    .get(shop);
 
 
 module.exports = router;

@@ -1,5 +1,5 @@
-const User = require("../models/user");
-const Shop = require("../models/shop");
+const User = require("./models/user");
+const Shop = require("./models/shop");
 const {hash} = require("bcrypt");
 const { ObjectId } = require("mongodb");
 

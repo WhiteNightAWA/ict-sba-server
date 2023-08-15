@@ -14,6 +14,7 @@ var cookieParser = require('cookie-parser')
 const port = process.env.PORT || 3100;
 const cors = require('cors');
 const {verifyJWT} = require("./middleware/verifyJWT");
+const shop = require("./shop");
 const server = express();
 
 server.use(express.json());
@@ -37,6 +38,7 @@ db.once("open", () => console.log("Connected to Database."));
 server.get("/", (req, res) => {
 	res.send("Welcome to the backend of https://whitenightawa.github.io/ict-sba/");
 });
+server.get("/shops", async (req, res) => await shop(req, res));
 server.use("/auth", require("./routes/authRouter"));
 server.use("/users", verifyJWT, require("./routes/usersRouter"));
 

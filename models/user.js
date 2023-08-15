@@ -40,27 +40,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    shopData: {
-        fn: String,
-        ln: String,
-        HKID: String,
-        vat: String,
-        shopName: String,
-        shopDesc: String,
-        avatar: String,
-        shopPhotos: [String],
-        phone: Number,
-        short: String,
-        rating: [{
-            username: String,
-            nick: Boolean,
-            rate: Number,
-            comment: String,
-            time: Date,
-        }],
-        position: [
-
-        ]
+    shop: {
+        type: ObjectId,
+        default: null
     }
 });
 

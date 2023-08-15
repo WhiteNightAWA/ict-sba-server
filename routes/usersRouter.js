@@ -36,6 +36,8 @@ router.route("/done")
     .post(done);
 router.route("/update")
     .post(update);
+router.route("/shops")
+    .get(shop);
 
 
 module.exports = router;

@@ -5,6 +5,15 @@ const {hash} = require("bcrypt");
 const update = async (req, res) => {
     try {
         const { type } = req.body;
+
+        if ([type].includes(undefined)) {
+            return res.status(400).json({
+                error: "uncompleted_form",
+                error_description: "Somethings is undefined in { type }.",
+                code: 400,
+            });
+        }
+
         let user = await User.findOne({ user_id: req.user_id });
         if (type === "buy") {
             return res.status(400).json({
@@ -12,20 +21,14 @@ const update = async (req, res) => {
                 success: "type_error",
                 msg: "You are not a seller!",
             });
-        } else {
-            const userData = req.body;
-            userData.password = user.password;
-            userData.shopData.HKID = user.shopData.HKID;
-            user = await User.findOneAndUpdate({ user_id: req.user_id }, userData);
-            user.password = "-";
-            if (user.shopData?.HKID) {
-                user.shopData.HKID = "-"
-            }
+        } else if (type === "sell") {
+            const { shopData } = req.body;
+            user = await User.findOne({ user_id: req.user_id });
+            shop = await shop.findOneAndUpdate({ _id: user.shop }, shopData);
             return res.status(200).json({
                 code: 200,
                 success: "update_successfully",
                 msg: "Update Successfully!",
-                user,
             });
         }
 

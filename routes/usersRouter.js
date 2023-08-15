@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/user");
 const {done} = require("../users/done");
 const {update} = require("../users/update");
+const {shop} = require("../users/shop");
 
 
 router.route("/")

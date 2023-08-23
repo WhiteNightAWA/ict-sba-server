@@ -28,7 +28,7 @@ const done = async (req, res) => {
             });
         } else if (type === "sell") {
             const {fn, ln, HKID, vat, shopName, position} = req.body;
-            shop = await Shop.createOne({
+            shop = await Shop.create({
                 fn, ln,
                 HKID: await hash(HKID, 12),
                 vat, shopName, position

@@ -38,8 +38,8 @@ db.once("open", () => console.log("Connected to Database."));
 server.get("/", (req, res) => {
 	res.send("Welcome to the backend of https://whitenightawa.github.io/ict-sba/");
 });
-server.get("/shops", async (req, res) => await shop(req, res));
 server.use("/auth", require("./routes/authRouter"));
+server.use("/shops", require("./routes/shopRouter"));
 server.use("/users", verifyJWT, require("./routes/usersRouter"));
 
 server.listen(port, () => {

@@ -4,9 +4,8 @@ const {hash} = require("bcrypt");
 const { ObjectId } = require("mongodb");
 
 
-const shop = async (req, res) => {
+const shop = async (req, res, shopID) => {
     try {
-        const { shopID } = req.body;
         if ([shopID].includes(undefined)) {
             return res.status(400).json({
                 error: "uncompleted_form",

@@ -27,11 +27,18 @@ const done = async (req, res) => {
                 sell: false
             });
         } else if (type === "sell") {
-            const {fn, ln, HKID, vat, shopName, position} = req.body;
+            const {fn, ln, HKID, vat, shopName, position, phone} = req.body;
+            if ([fn, ln, HKID, vat, shopName, position, phone].includes(undefined)) {
+                return res.status(400).json({
+                    error: "uncompleted_form",
+                    error_description: "Somethings is undefined in { sell data }.",
+                    code: 400,
+                });
+            }
             shop = await Shop.create({
                 fn, ln,
                 HKID: await hash(HKID, 12),
-                vat, shopName, position
+                vat, shopName, position, phone
             })
             user = await User.findOneAndUpdate({ user_id: req.user_id }, {
                 type: "sell",

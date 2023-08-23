@@ -22,7 +22,7 @@ const update = async (req, res) => {
                 msg: "You are not a seller!",
             });
         } else if (type === "sell") {
-            const { shopData } = req.body;
+            const shopData = req.body;
             user = await User.findOne({ user_id: req.user_id });
             shop = await shop.findOneAndUpdate({ _id: user.shop }, shopData);
             return res.status(200).json({

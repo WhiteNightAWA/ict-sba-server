@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0a57efe9-4f2e-438f-81b0-99620953e319" name="Changes" comment="Update login">
-      <change afterPath="$PROJECT_DIR$/users/update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/usersRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/usersRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/shop.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/done.js" beforeDir="false" afterPath="$PROJECT_DIR$/users/done.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/update.js" beforeDir="false" afterPath="$PROJECT_DIR$/users/update.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +28,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -89,6 +93,9 @@
       <updated>1691831231792</updated>
       <workItem from="1691831233048" duration="11702000" />
       <workItem from="1691914398710" duration="4156000" />
+      <workItem from="1692873571470" duration="3799000" />
+      <workItem from="1693049654356" duration="2318000" />
+      <workItem from="1693133107004" duration="2451000" />
     </task>
     <task id="LOCAL-00001" summary="Update login">
       <option name="closed" value="true" />
@@ -103,6 +110,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update login" />

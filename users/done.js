@@ -27,8 +27,8 @@ const done = async (req, res) => {
                 sell: false
             });
         } else if (type === "sell") {
-            const {fn, ln, HKID, vat, shopName, position, phone} = req.body;
-            if ([fn, ln, HKID, vat, shopName, position, phone].includes(undefined)) {
+            const {fn, ln, HKID, vat, shopName, position, phone, address} = req.body;
+            if ([fn, ln, HKID, vat, shopName, position, phone, address].includes(undefined)) {
                 return res.status(400).json({
                     error: "uncompleted_form",
                     error_description: "Somethings is undefined in { sell data }.",
@@ -38,7 +38,8 @@ const done = async (req, res) => {
             shop = await Shop.create({
                 fn, ln,
                 HKID: await hash(HKID, 12),
-                vat, shopName, position, phone
+                createTime: new Date(),
+                vat, shopName, position, phone, address
             })
             user = await User.findOneAndUpdate({ user_id: req.user_id }, {
                 type: "sell",

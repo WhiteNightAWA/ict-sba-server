@@ -40,6 +40,7 @@ server.get("/", (req, res) => {
 });
 server.use("/auth", require("./routes/authRouter"));
 server.use("/shops", require("./routes/shopRouter"));
+server.use("/data", require("./routes/dataRouter"));
 server.use("/users", verifyJWT, require("./routes/usersRouter"));
 
 server.listen(port, () => {

@@ -12,6 +12,7 @@ const shopSchema = new mongoose.Schema({
     shopPhotos: [String],
     phone: Number,
     short: String,
+    address: String,
     rating: [{
         username: String,
         nick: Boolean,

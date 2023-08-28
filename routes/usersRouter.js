@@ -4,14 +4,15 @@ const User = require("../models/user");
 const {done} = require("../users/done");
 const {update} = require("../users/update");
 const {shop} = require("../shop");
+const {addItem} = require("../users/addItem");
 
 
 router.route("/")
     .post((req, res) => {
-        res.json("Welcome to the users.")
+        res.json(`Welcome to the users, ${req.username}`)
     })
     .get((req, res) => {
-        res.json("Welcome to the users.")
+        res.json(`Welcome to the users, ${req.username}`)
     });
 
 router.route("/test")
@@ -37,6 +38,8 @@ router.route("/done")
     .post(done);
 router.route("/update")
     .post(update);
+router.route("/addItem")
+    .post(addItem);
 
 
 module.exports = router;

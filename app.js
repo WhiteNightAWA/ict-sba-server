@@ -39,7 +39,7 @@ server.get("/", (req, res) => {
 	res.send("Welcome to the backend of https://whitenightawa.github.io/ict-sba/");
 });
 server.use("/auth", require("./routes/authRouter"));
-server.use("/shops", require("./routes/shopRouter"));
+server.use("/shops", require("./routes/shopsRouter"));
 server.use("/data", require("./routes/dataRouter"));
 server.use("/users", verifyJWT, require("./routes/usersRouter"));
 

@@ -13,8 +13,8 @@ const addItem = async (req, res) => {
                 msg: "You are not a seller!",
             });
         } else if (user.type === "sell") {
-            const {imageList, selectedCategory, others, selectedCategoryOther, name, unit, desc, price} = req.body;
-            if ([imageList, selectedCategory, others, selectedCategoryOther, name, unit, desc, price].includes(undefined)) {
+            const {imageList, selectedCategory, others, selectedCategoryOther, name, unit, desc, barCode, price} = req.body;
+            if ([imageList, selectedCategory, others, selectedCategoryOther, name, unit, desc, barCode, price].includes(undefined)) {
                 return res.status(400).json({
                     error: "uncompleted_form",
                     error_description: "Somethings is undefined in body.",
@@ -22,7 +22,7 @@ const addItem = async (req, res) => {
                 });
             }
             if (
-                [name, unit, desc].includes("") ||
+                [name, unit, desc, barCode].includes("") ||
                 !(
                     (others && selectedCategoryOther) ||
                     (!others && selectedCategory.length > 0)
@@ -52,7 +52,7 @@ const addItem = async (req, res) => {
             let item = await Items.create({
                 shopId: shop._id,
                 record: [],
-                imageList, selectedCategory, others, selectedCategoryOther, name, unit, desc, price,
+                imageList, selectedCategory, others, selectedCategoryOther, name, unit, desc, barCode, price,
             })
 
             return res.status(200).json({

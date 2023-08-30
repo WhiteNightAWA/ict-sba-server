@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const {get} = require("../shops/get");
 const {items} = require("../shops/items");
+const {item} = require("../shops/item");
+const {verifyJWT} = require("../middleware/verifyJWT");
 
 
 router.route("/")
@@ -16,6 +18,9 @@ router.route("/get/:shopID")
     .get(get);
 router.route("/items/:shopID")
     .get(items);
-
+router.route("/items!/:shopID")
+    .get(verifyJWT, items);
+router.route("/item/:itemId")
+    .get(item);
 
 module.exports = router;

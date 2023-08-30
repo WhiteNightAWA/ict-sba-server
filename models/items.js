@@ -22,7 +22,12 @@ const itemsSchema = new mongoose.Schema({
         time: Date,
         barCode: String,
         count: Number,
-    }]
+    }],
+
+    visible: {
+        type: Boolean,
+        default: true,
+    }
 });
 
 

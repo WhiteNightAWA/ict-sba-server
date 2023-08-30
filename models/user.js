@@ -44,7 +44,15 @@ const userSchema = new mongoose.Schema({
     shop: {
         type: ObjectId,
         default: null
-    }
+    },
+    favorited: {
+        type: [String],
+        required: true
+    },
+    followed: {
+        type: [String],
+        required: true
+    },
 });
 
 module.exports = mongoose.model("User", userSchema);

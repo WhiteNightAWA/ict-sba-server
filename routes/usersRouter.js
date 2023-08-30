@@ -4,7 +4,8 @@ const User = require("../models/user");
 const {done} = require("../users/done");
 const {update} = require("../users/update");
 const {shop} = require("../shop");
-const {addItem} = require("../users/addItem");
+const {addItem, editItem, deleteItem} = require("../users/modifyItem");
+const {marked} = require("../users/marked");
 
 
 router.route("/")
@@ -40,6 +41,10 @@ router.route("/update")
     .post(update);
 router.route("/addItem")
     .post(addItem);
-
+router.route("/editItem/:itemId")
+    .put(editItem)
+    .delete(deleteItem);
+router.route("/marked/:itemId")
+    .put(marked);
 
 module.exports = router;

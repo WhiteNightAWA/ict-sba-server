@@ -27,7 +27,16 @@ const itemsSchema = new mongoose.Schema({
     visible: {
         type: Boolean,
         default: true,
-    }
+    },
+
+    rating: [{
+        imageList: [String],
+        rate: Number,
+        user_id: String,
+        name: String,
+        desc: String,
+        anonymous: Boolean,
+    }]
 });
 
 

@@ -6,7 +6,7 @@ const {ObjectId} = require("mongodb");
 
 const marked = async (req, res) => {
     try {
-        let { itemId } = req.params;
+        let {itemId} = req.params;
         if ([itemId].includes(undefined)) {
             return res.status(400).json({
                 error: "uncompleted_form",
@@ -15,11 +15,11 @@ const marked = async (req, res) => {
             });
         }
 
-        let { action } = req.body;
+        let {action} = req.body;
         if ([action].includes(undefined)) {
             return res.status(400).json({
                 error: "uncompleted_form",
-                error_description: "Somethings is undefined in body.",
+                error_description: "Somethings is undefined in { action }.",
                 code: 400,
             });
         }
@@ -35,8 +35,8 @@ const marked = async (req, res) => {
             });
         }
 
-        const item = await Items.findOne({ _id: itemId });
-        let user = await User.findOne({ user_id: req.user_id });
+        let item = await Items.findOne({_id: itemId});
+        let user = await User.findOne({user_id: req.user_id});
         if (!item || !user) {
             return res.status(400).json({
                 error: "invalid_itemId_or_user",
@@ -48,7 +48,7 @@ const marked = async (req, res) => {
 
         switch (action) {
             case "favorite":
-                user = await User.findOneAndUpdate({ user_id: req.user_id }, {
+                user = await User.findOneAndUpdate({user_id: req.user_id}, {
                     favorited: user.favorited.includes(itemId.toString()) ? user.favorited : [...user.favorited, itemId.toString()]
                 });
                 return res.status(200).json({
@@ -58,7 +58,7 @@ const marked = async (req, res) => {
                     favorited: user.favorited.includes(itemId.toString()) ? user.favorited : [...user.favorited, itemId.toString()]
                 })
             case "unfavorite":
-                user = await User.findOneAndUpdate({ user_id: req.user_id }, {
+                user = await User.findOneAndUpdate({user_id: req.user_id}, {
                     favorited: user.favorited.includes(itemId.toString()) ? user.favorited.filter(f => f !== itemId.toString()) : user.favorited
                 });
                 return res.status(200).json({
@@ -67,11 +67,50 @@ const marked = async (req, res) => {
                     msg: "Unfavorited Successfully!",
                     favorited: user.favorited.includes(itemId.toString()) ? user.favorited.filter(f => f !== itemId.toString()) : user.favorited
                 });
+            case "rate":
+                const {imageList, rate, desc, anonymous} = req.body;
+                if ([imageList, rate, desc, anonymous].includes(undefined)) {
+                    return res.status(400).json({
+                        error: "uncompleted_form",
+                        error_description: "Somethings is undefined in { imageList, rate, desc, anonymous }.",
+                        code: 400,
+                    });
+                };
+                let oldRating = item.rating ? item.rating : [];
+                let newRating;
+                if (oldRating.filter(r => r.user_id === user.user_id).length === 0) {
+                    newRating = [
+                        ...item.rating,
+                        {
+                            user_id: user.user_id,
+                            imageList, rate, desc, anonymous,
+                        }
+                    ];
+                } else {
+                    newRating = [
+                        ...oldRating.filter(r => r.user_id !== user.user_id),
+                        {
+                            user_id: user.user_id,
+                            imageList, rate, desc, anonymous,
+                        }
+                    ]
+                }
+
+                item = await Items.findOneAndUpdate({_id: itemId}, {
+                    rating: newRating
+                });
+
+                return res.status(200).json({
+                    code: 200,
+                    success: "rated",
+                    msg: "Rated",
+                    rating: newRating,
+                });
             default:
                 return res.status(400).json({
                     code: 400,
-                    success: "invalid_action",
-                    msg: "Invalid Action",
+                    error: "invalid_action",
+                    error_description: "Invalid Action",
                 })
         }
 

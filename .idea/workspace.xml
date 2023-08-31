@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0a57efe9-4f2e-438f-81b0-99620953e319" name="Changes" comment="Update login">
-      <change afterPath="$PROJECT_DIR$/shops/item.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/marked.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/items.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/items.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/shopsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/shopsRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/usersRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/usersRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shops/items.js" beforeDir="false" afterPath="$PROJECT_DIR$/shops/items.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/addItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/users/modifyItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/marked.js" beforeDir="false" afterPath="$PROJECT_DIR$/users/marked.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +65,7 @@
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
+      <command value="noed" />
       <command value="node" />
     </option>
   </component>
@@ -109,7 +104,8 @@
       <workItem from="1693209996726" duration="7297000" />
       <workItem from="1693298422112" duration="1483000" />
       <workItem from="1693322606439" duration="801000" />
-      <workItem from="1693363718254" duration="9048000" />
+      <workItem from="1693363718254" duration="9117000" />
+      <workItem from="1693449798989" duration="6338000" />
     </task>
     <task id="LOCAL-00001" summary="Update login">
       <option name="closed" value="true" />

@@ -41,6 +41,33 @@ server.get("/", (req, res) => {
 server.use("/auth", require("./routes/authRouter"));
 server.use("/shops", require("./routes/shopsRouter"));
 server.use("/data", require("./routes/dataRouter"));
+server.route("/user/:user_id")
+	.get(async (req, res) => {
+		let { user_id } = req.params;
+		if ([user_id].includes(undefined)) {
+			return res.status(400).json({
+				error: "uncompleted_form",
+				error_description: "Somethings is undefined in { user_id }.",
+				code: 400,
+			});
+		}
+		let user = await User.findOne({ user_id: user_id });
+		if (user) {
+			user.password = "-";
+			return res.status(200).json({
+				code: 200,
+				success: "get_user_successfully",
+				msg: "Get User Successfully",
+				user: user,
+			})
+		} else {
+			return res.status(400).json({
+				error: "invalid_user",
+				error_description: "Invalid User.",
+				code: 400,
+			});
+		}
+	});
 server.use("/users", verifyJWT, require("./routes/usersRouter"));
 
 server.listen(port, () => {

@@ -193,7 +193,7 @@ const deleteItem = async (req, res) => {
 
             let item = await Items.findOne({ _id: itemId });
             if (item) {
-                item = await Items.findByIdAndDelete(itemId);
+                item = await Items.findByIdAndUpdate({ _id: itemId }, { deleted: true });
                 return res.status(200).json({
                     code: 200,
                     success: "deleted_successfully",

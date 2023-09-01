@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a57efe9-4f2e-438f-81b0-99620953e319" name="Changes" comment="Update login">
+    <list default="true" id="0a57efe9-4f2e-438f-81b0-99620953e319" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/items.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/items.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shops/get.js" beforeDir="false" afterPath="$PROJECT_DIR$/shops/get.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shops/items.js" beforeDir="false" afterPath="$PROJECT_DIR$/shops/items.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/marked.js" beforeDir="false" afterPath="$PROJECT_DIR$/users/marked.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/modifyItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/users/modifyItem.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +108,7 @@
       <workItem from="1693322606439" duration="801000" />
       <workItem from="1693363718254" duration="9117000" />
       <workItem from="1693449798989" duration="10662000" />
-      <workItem from="1693553216439" duration="5180000" />
+      <workItem from="1693553216439" duration="8047000" />
     </task>
     <task id="LOCAL-00001" summary="Update login">
       <option name="closed" value="true" />
@@ -118,7 +118,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691858574914</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update login">
+      <option name="closed" value="true" />
+      <created>1693570662990</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1693570662990</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,6 +144,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <MESSAGE value="Update login" />
     <option name="LAST_COMMIT_MESSAGE" value="Update login" />
   </component>

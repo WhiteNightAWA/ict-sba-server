@@ -28,6 +28,10 @@ const itemsSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
     },
+    deleted: {
+        type: Boolean,
+        default: false,
+    },
 
     rating: [{
         imageList: [String],

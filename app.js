@@ -4,6 +4,7 @@ const {sign} = require("jsonwebtoken");
 const {register} = require("./auth/register");
 const {login} = require("./auth/login");
 const User = require("./models/user");
+const Shop = require("./models/shop");
 const mongoose = require("mongoose");
 const EmailVerify = require("./models/emailVerify");
 require("dotenv").config();
@@ -69,6 +70,21 @@ server.route("/user/:user_id")
 		}
 	});
 server.use("/users", verifyJWT, require("./routes/usersRouter"));
+
+
+
+// temp
+server.route("/temp/getShops")
+	.get(async (req, res) => {
+		return res.status(200).json({
+			code: 200,
+			success: "get_shop_successfully",
+			msg: "Get Shop Successfully",
+			shops: await Shop.find({}, { _id: 1, shopName: 1 }),
+		})
+	});
+
+
 
 server.listen(port, () => {
 	console.log(`Server listening to ${process.env.PORT || 3100} port.`);

@@ -32,7 +32,7 @@ const get = async (req, res) => {
                 switch (get_type) {
                     case "rating":
                         let rating = await Items.find({ shopId: shop._id }, {
-                            name: 1, rating: 1, _id: 1,
+                            name: 1, rating: 1, _id: 1, imageList: 1, visible: 1, deleted: 1,
                         });
                         return res.status(200).json({
                             code: 200,

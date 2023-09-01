@@ -36,6 +36,7 @@ const itemsSchema = new mongoose.Schema({
         name: String,
         desc: String,
         anonymous: Boolean,
+        lastEdit: Date,
     }]
 });
 

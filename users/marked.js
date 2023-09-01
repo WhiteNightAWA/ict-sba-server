@@ -83,6 +83,7 @@ const marked = async (req, res) => {
                         ...item.rating,
                         {
                             user_id: user.user_id,
+                            lastEdit: new Date(),
                             imageList, rate, desc, anonymous,
                         }
                     ];
@@ -91,6 +92,7 @@ const marked = async (req, res) => {
                         ...oldRating.filter(r => r.user_id !== user.user_id),
                         {
                             user_id: user.user_id,
+                            lastEdit: new Date(),
                             imageList, rate, desc, anonymous,
                         }
                     ]

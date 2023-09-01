@@ -38,10 +38,7 @@ const items = async (req, res) => {
                 });
             } else if (user.type === "sell") {
                 if (user.shop.toString() === shopID.toString()) {
-                    await Items.find({ shopId: shopID })
-                        .then((i) => {
-                            let items = i;
-                    })
+                    let items = await Items.find({ shopId: shopID });
                     return res.status(200).json({
                         code: 200,
                         success: "search_successfully",

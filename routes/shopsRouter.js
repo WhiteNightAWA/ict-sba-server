@@ -4,6 +4,7 @@ const {get} = require("../shops/get");
 const {items} = require("../shops/items");
 const {item} = require("../shops/item");
 const {verifyJWT} = require("../middleware/verifyJWT");
+const {search} = require("../shops/buy");
 
 
 router.route("/")
@@ -22,5 +23,7 @@ router.route("/items!/:shopID")
     .get(verifyJWT, items);
 router.route("/item/:itemId")
     .get(item);
+router.route("/search")
+    .get(search);
 
 module.exports = router;

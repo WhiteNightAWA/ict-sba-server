@@ -25,7 +25,7 @@ const update = async (req, res) => {
                         error_description: "You are not a seller!",
                     });
                 } else if (user.type === "sell") {
-                    const shopData = req.body;
+                    const shopData = req.body.update;
                     shop = await Shop.findOneAndUpdate({ _id: user.shop }, shopData);
                     return res.status(200).json({
                         code: 200,

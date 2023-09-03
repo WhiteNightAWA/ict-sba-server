@@ -91,6 +91,13 @@ const login = async (req, res) => {
         }
 
         const user = await User.findOne({email});
+        if (!user) {
+            return res.status(400).json({
+                error: "invalid_user",
+                error_description: "Invalid User.",
+                code: 400,
+            });
+        }
         console.log(user);
         if (user.google) {
             return res.status(400).json({

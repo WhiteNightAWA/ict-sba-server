@@ -38,7 +38,7 @@ router.route("/test")
 router.route("/done")
     .post(done);
 router.route("/update")
-    .post(update);
+    .put(update);
 router.route("/addItem")
     .post(addItem);
 router.route("/editItem/:itemId")

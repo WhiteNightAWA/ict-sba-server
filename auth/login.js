@@ -106,7 +106,19 @@ const login = async (req, res) => {
                 code: 400,
             });
         }
-        return await doLogin(user, res);
+        compare(user.password, password, async (err, res) => {
+            if (err) {
+               console.error(err);
+            }
+            if (res) {
+                 return await doLogin(user, res);
+            } else {
+                return res.status(400).json({
+                    error: "incorrect_email_or_password",
+                    error_description: "Incorrect Email or Password.",
+                    code: 400,
+                });
+            }
     } catch (err) {
         console.log(err);
         return res.status(500).json({

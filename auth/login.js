@@ -106,11 +106,11 @@ const login = async (req, res) => {
                 code: 400,
             });
         }
-        compare(user.password, password, async (err, res) => {
+        compare(user.password, password, async (err, resp) => {
             if (err) {
                console.error(err);
             }
-            if (res) {
+            if (resp) {
                  return await doLogin(user, res);
             } else {
                 return res.status(400).json({

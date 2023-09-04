@@ -119,7 +119,7 @@ const login = async (req, res) => {
                     code: 400,
                 });
             }
-        });
+        }); 
     } catch (err) {
         console.log(err);
         return res.status(500).json({

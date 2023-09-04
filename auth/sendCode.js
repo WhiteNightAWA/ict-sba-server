@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 const asyncHandler = require('express-async-handler')
 
-const realSend = false;
+const realSend = true;
 
 const sendCode = async (req, res) => {
     console.log("test");

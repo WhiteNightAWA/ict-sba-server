@@ -3,6 +3,7 @@ const EmailVerify = require("../models/emailVerify");
 const { hash } = require("bcrypt");
 const { v4 } = require("uuid");
 const axios = require("axios");
+const {doLogin} = require("./login");
 
 
 const doRegister = async (username, email, password, google, res, picture) => {
@@ -14,62 +15,25 @@ const doRegister = async (username, email, password, google, res, picture) => {
         user_id: v4(),
         photoURL: picture
     });
-    console.log(user);
     const { user_id } = user;
 
     if (!google) {
         await EmailVerify.deleteMany({ email: email });
     }
-
-    return res.status(200).json({
-        code: 200,
-        user_id,
-        success: "register_successfully",
-        msg: "Sign Up Successfully!",
-    })
+    if (google) {
+        await doLogin(user, res);
+    } else {
+        return res.status(200).json({
+            code: 200,
+            user_id,
+            success: "register_successfully",
+            msg: "Sign Up Successfully!",
+        })
+    }
 };
 const register = async (req, res) => {
     try {
-        const {username, email, code, password, google} = req.body;
-
-        if (google) {
-            const {access_token} = google;
-            if ([access_token].includes(undefined)) {
-                return res.status(400).json({
-                    error: "uncompleted_form",
-                    error_description: "Somethings is undefined in { access_token }.",
-                    code: 400,
-                });
-            }
-
-            const user = User.findOne({email: google.email});
-            console.log(user.email);
-            if (user.email) {
-                return res.status(400).json({
-                    error: "already_registered",
-                    error_description: "This email had already registered",
-                    code: 400,
-                });
-            }
-
-            let response;
-            try {
-                response = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-                    headers: {Authorization: `Bearer ${access_token}`}
-                });
-            } catch (err) {
-                console.log(err);
-                return res.status(400).json({
-                    error: "invalid_access_token",
-                    error_description: "Invalid access token.",
-                    code: 400,
-                });
-            }
-
-            const { name, email, picture } = response.data;
-            return await doRegister(name, email, "google", true, res, picture);
-        }
-
+        const {username, email, code, password} = req.body;
 
         if ([username, email, code, password].includes(undefined)) {
             return res.status(400).json({
@@ -117,5 +81,5 @@ const register = async (req, res) => {
 }
 
 module.exports = {
-    register
+    register, doRegister,
 }

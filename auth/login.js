@@ -37,50 +37,7 @@ const doLogin = async (user, res) => {
 
 const login = async (req, res) => {
     try {
-        const {email, password, google} = req.body;
-        if (google) {
-            const {access_token} = google;
-            if ([access_token].includes(undefined)) {
-                return res.status(400).json({
-                    error: "uncompleted_form",
-                    error_description: "Somethings is undefined in { access_token }.",
-                    code: 400,
-                });
-            }
-
-            let response;
-            try {
-                response = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-                    headers: {Authorization: `Bearer ${access_token}`}
-                });
-            } catch (err) {
-                console.log(err);
-                return res.status(400).json({
-                    error: "invalid_access_token",
-                    error_description: "Invalid access token.",
-                    code: 400,
-                });
-            }
-            const {email} = response.data;
-
-            const user = await User.findOne({email});
-            if (!user) {
-                return res.status(400).json({
-                    error: "not_register",
-                    error_description: "This Email had not register yet.",
-                    code: 400,
-                });
-            }
-            if (!user.google) {
-                return res.status(400).json({
-                    error: "not_google",
-                    error_description: "This Email had been register as normal account.",
-                    code: 400,
-                });
-            }
-
-            return await doLogin(user, res);
-        }
+        const {email, password} = req.body;
 
         if ([email, password].includes(undefined)) {
             return res.status(400).json({
@@ -108,10 +65,16 @@ const login = async (req, res) => {
         }
         compare(user.password, password, async (err, resp) => {
             if (err) {
-               console.error(err);
+                console.error(err);
+                return res.status(500).json({
+                    error: "server_error",
+                    error_description: err.toString(),
+                    error_json: err,
+                    code: 500,
+                });
             }
             if (resp) {
-                 return await doLogin(user, res);
+                return await doLogin(user, res);
             } else {
                 return res.status(400).json({
                     error: "incorrect_email_or_password",
@@ -119,7 +82,7 @@ const login = async (req, res) => {
                     code: 400,
                 });
             }
-        }); 
+        });
     } catch (err) {
         console.log(err);
         return res.status(500).json({
@@ -131,7 +94,6 @@ const login = async (req, res) => {
     }
 };
 
-
 module.exports = {
-    login,
+    login, doLogin,
 };

@@ -1,4 +1,5 @@
 const Items = require("../models/items");
+const User = require("../models/user");
 const {ObjectId} = require("mongodb");
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -36,16 +37,21 @@ const search = async (req, res) => {
             position = JSON.parse(position);
         }
         selectedCategory = JSON.parse(selectedCategory);
-        favorited = JSON.parse(favorited).map((f, index) => {
-            try {
-                return new ObjectId(f);
-            } catch (err) {
-                return ""
-            }
-        });
+        let user = await User.findOne({ user_id: favorited }, { favorited: 1 });
+        if (user) {
+            favorited = user.favorited.map((f, index) => {
+                try {
+                    return new ObjectId(f);
+                } catch (err) {
+                    return ""
+                }
+            });
+        } else {
+            favorited = []
+        }
+
         un = un === "true";
         noSave = noSave === "true";
-        console.log(favorited);
         let results = await Items.aggregate([
             { $match: {
                     $and: [

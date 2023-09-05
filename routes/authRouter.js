@@ -3,6 +3,7 @@ const {login} = require("../auth/login");
 const {logout} = require("../auth/logout");
 const {sendCode} = require("../auth/sendCode");
 const {register} = require("../auth/register");
+const {google} = require("../auth/google");
 const router = express.Router();
 
 router.route("/")
@@ -19,6 +20,8 @@ router.route("/logout")
     .post(logout);
 router.route("/register")
     .post(register);
+router.route("/google")
+    .post(google);
 router.route("/code")
     .post(sendCode);
 

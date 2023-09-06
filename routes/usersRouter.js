@@ -6,6 +6,7 @@ const {update} = require("../users/update");
 const {shop} = require("../shop");
 const {addItem, editItem, deleteItem} = require("../users/modifyItem");
 const {marked} = require("../users/marked");
+const {ioItem} = require("../users/ioItem");
 
 
 router.route("/")
@@ -46,5 +47,7 @@ router.route("/editItem/:itemId")
     .delete(deleteItem);
 router.route("/marked/:itemId")
     .put(marked);
+router.route("/ioItem/:itemId")
+    .put(ioItem);
 
 module.exports = router;

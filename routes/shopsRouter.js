@@ -19,7 +19,7 @@ router.route("/get/:shopID")
     .get(get);
 router.route("/items/:shopID")
     .get(items);
-router.route("/items!/:shopID")
+router.route("/items!")
     .get(verifyJWT, items);
 router.route("/item/:itemId")
     .get(item);

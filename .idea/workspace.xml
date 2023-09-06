@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0a57efe9-4f2e-438f-81b0-99620953e319" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/auth/google.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/ioItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/auth/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/auth/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/authRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/authRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shops/buy.js" beforeDir="false" afterPath="$PROJECT_DIR$/shops/buy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/shopsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/shopsRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/usersRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/usersRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shops/items.js" beforeDir="false" afterPath="$PROJECT_DIR$/shops/items.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +115,8 @@
       <workItem from="1693642340398" duration="15690000" />
       <workItem from="1693730984679" duration="12162000" />
       <workItem from="1693757642173" duration="1190000" />
-      <workItem from="1693901843184" duration="3612000" />
+      <workItem from="1693901843184" duration="3901000" />
+      <workItem from="1694001500513" duration="6537000" />
     </task>
     <task id="LOCAL-00001" summary="Update login">
       <option name="closed" value="true" />
@@ -164,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1693758466895</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Update login">
+      <option name="closed" value="true" />
+      <created>1693909317627</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1693909317627</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -171,9 +171,8 @@ const search = async (req, res) => {
                         { "distance": un ? -1 : 1 } :
                         { "name": un ? -1 : 1 },
                 },
-                { $facet: { count: [ {"$count": "value"} ], paginatedResults: [ {"$skip": page * 5}, {"$limit": 5} ] } }
-        ])
-        ;
+                { $facet: { count: [ {"$count": "value"} ], paginatedResults: [ {"$skip": page * 10}, {"$limit": 10} ] } }
+        ]);
         return res.status(200).json({
             code: 200,
             success: "search_successfully",
